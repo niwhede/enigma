@@ -34,8 +34,13 @@ export abstract class Encoder {
     this.cypher = cypher;
   }
 
-  encode(char: string) {
-    const index = Encoder.ALPHA.indexOf(char);
-    return this.cypher[index];
+  encode(char: string, direction: "forwards" | "backwards" = "forwards") {
+    if (direction === "forwards") {
+      const index = Encoder.ALPHA.indexOf(char);
+      return this.cypher[index];
+    } else {
+      const index = this.cypher.indexOf(char);
+      return Encoder.ALPHA[index];
+    }
   }
 }

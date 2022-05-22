@@ -9,12 +9,16 @@ export class Rotor extends Encoder {
     V: "VZBRGITYUPSDNHLXAWMJQOFECK",
   };
 
-  ringPosition: number;
-  initialPosition: number;
+  private ringPosition: number;
+  private position: number;
 
-  constructor(cypher: string, ringPosition: number, initialPosition: number) {
+  constructor(cypher: string, ringPosition: number, position: number) {
     super(cypher);
     this.ringPosition = ringPosition;
-    this.initialPosition = initialPosition;
+    this.position = position;
+  }
+
+  getPosition() {
+    return this.position;
   }
 }
