@@ -11,5 +11,9 @@ const enigma = new Enigma(
   new Reflector(Reflector.CYPHER.B)
 );
 
-const result = enigma.encode("A");
-console.log("result", result);
+console.log("Rotor start position", enigma.getRotorPositions());
+const result = enigma.encode("ABC");
+console.log("");
+console.log("encoded:", result);
+console.log("actual:", "UAR");
+console.log("Rotor end position", enigma.getRotorPositions());
