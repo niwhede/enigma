@@ -10,16 +10,23 @@ export class Enigma {
     this.reflector = reflector;
   }
 
+  getEncodingChain() {
+    return [...this.rotors, this.reflector, ...this.rotors.slice().reverse()];
+  }
+
   encode(char: string) {
-    const forward = [
-      ...this.rotors,
-      this.reflector,
-      ...this.rotors.reverse(),
-    ].reduce((encoded, rotor, i) => {
-      encoded = rotor.encode(encoded, i > 3 ? "backwards" : "forwards");
-      console.log(`Step: ${i + 1} -> ${encoded}`);
+    return this.getEncodingChain().reduce((encoded, rotor, i) => {
+      if (rotor instanceof Rotor) {
+        if (i === 0) {
+          rotor.rotate();
+        }
+      }
+      encoded = rotor.encode(encoded, i > 3 ? "b" : "f");
       return encoded;
     }, char);
-    return forward;
+  }
+
+  getRotorPositions() {
+    return this.rotors.map((r) => r.getPosition());
   }
 }

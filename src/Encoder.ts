@@ -1,4 +1,5 @@
 export abstract class Encoder {
+  // this can be string?
   static ALPHA = [
     "A",
     "B",
@@ -34,13 +35,23 @@ export abstract class Encoder {
     this.cypher = cypher;
   }
 
-  encode(char: string, direction: "forwards" | "backwards" = "forwards") {
-    if (direction === "forwards") {
+  // getInvertedCypher() {
+  //   const result = Encoder.ALPHA.map((letter) => {
+  //     return {};
+  //   });
+  //   return result;
+  // }
+
+  encode(char: string, direction: "f" | "b" = "f") {
+    let result: string;
+    if (direction === "f") {
       const index = Encoder.ALPHA.indexOf(char);
-      return this.cypher[index];
+      result = this.cypher[index];
     } else {
       const index = this.cypher.indexOf(char);
-      return Encoder.ALPHA[index];
+      result = Encoder.ALPHA[index];
     }
+    console.log(char, this.cypher, result);
+    return result;
   }
 }
