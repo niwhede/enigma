@@ -7,14 +7,24 @@ export abstract class Encoder {
     this.cypher = cypher;
   }
 
-  encode(char: string, direction: "f" | "b" = "f") {
+  rotateCypher(cypher: string, steps: number) {
+    const n = steps % cypher.length;
+    return cypher.slice(n) + cypher.slice(0, n);
+  }
+
+  encode(char: string, offset: number, direction: "f" | "b" = "f") {
     let result: string;
     if (direction === "f") {
-      const index = Encoder.ALPHA.indexOf(char);
-      result = this.cypher[index];
+      let index = Encoder.ALPHA.indexOf(char) + offset; // Where char is in rotated alpahet
+      result = this.cypher[index - offset]; // The char it encodes to
+      index = Encoder.ALPHA.indexOf(result) - offset; // The index of that char in rotated alphabet
+      result = Encoder.ALPHA[index]; // The char at that index in the alphabet
     } else {
-      const index = this.cypher.indexOf(char);
-      result = Encoder.ALPHA[index];
+      let index = Encoder.ALPHA.indexOf(char) + offset;
+      let charAtIndex = Encoder.ALPHA[index];
+      let indexInCypher = this.cypher.indexOf(charAtIndex);
+      let testResult = Encoder.ALPHA[indexInCypher];
+      result = testResult;
     }
     console.log(char, this.cypher, result);
     return result;

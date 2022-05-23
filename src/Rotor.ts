@@ -40,16 +40,11 @@ export class Rotor extends Encoder {
     this.position = position;
     this.rotorName = rotorName;
 
-    this.rotateCypher(position - 1);
-  }
-
-  rotateCypher(steps: number) {
-    const n = steps % this.cypher.length;
-    this.cypher = this.cypher.slice(n) + this.cypher.slice(0, n);
+    this.cypher = this.rotateCypher(this.cypher, position - 1);
   }
 
   rotate(steps: number) {
-    this.rotateCypher(steps);
+    this.cypher = this.rotateCypher(this.cypher, steps);
     this.position = this.position + 1;
 
     if (this.position > 26) {

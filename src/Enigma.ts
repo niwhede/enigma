@@ -16,12 +16,14 @@ export class Enigma {
 
   encodeChar(char: string) {
     const res = this.getEncodingChain().reduce((encoded, rotor, i) => {
+      let offset = 0;
       if (rotor instanceof Rotor) {
         if (i === 0) {
           rotor.rotate(1);
         }
+        offset = rotor.getPosition() - 1;
       }
-      encoded = rotor.encode(encoded, i > 3 ? "b" : "f");
+      encoded = rotor.encode(encoded, offset, i > 3 ? "b" : "f");
       return encoded;
     }, char);
     this.printRotorPosition();
