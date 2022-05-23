@@ -4,9 +4,9 @@ import { Rotor } from "./Rotor";
 
 const enigma = new Enigma(
   [
-    new Rotor(Rotor.CYPHER.III, 1, 26),
-    new Rotor(Rotor.CYPHER.II, 1, 1),
-    new Rotor(Rotor.CYPHER.I, 1, 1),
+    new Rotor(Rotor.ROTOR.III, 1, 26),
+    new Rotor(Rotor.ROTOR.II, 1, 1),
+    new Rotor(Rotor.ROTOR.I, 1, 1),
   ],
   new Reflector(Reflector.CYPHER.B)
 );

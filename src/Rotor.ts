@@ -1,7 +1,17 @@
 import { Encoder } from "./Encoder";
 
+type RotorName = "I" | "II" | "III" | "IV" | "V";
+
 export class Rotor extends Encoder {
-  static CYPHER = {
+  static ROTOR: Record<RotorName, RotorName> = {
+    I: "I",
+    II: "II",
+    III: "III",
+    IV: "IV",
+    V: "V",
+  };
+
+  static CYPHER: Record<RotorName, string> = {
     I: "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
     II: "AJDKSIRUXBLHWTMCQGZNPYFVOE",
     III: "BDFHJLCPRTXVZNYEIWGAKMUSQO",
@@ -9,13 +19,25 @@ export class Rotor extends Encoder {
     V: "VZBRGITYUPSDNHLXAWMJQOFECK",
   };
 
+  static NOTCH_POSITION = {
+    I: "Q",
+    II: "E",
+    III: "V",
+    IV: "J",
+    V: "Z",
+  };
+
   private ringPosition: number;
   private position: number;
+  private notchPosition: number;
 
-  constructor(cypher: string, ringPosition: number, position: number) {
-    super(cypher);
+  constructor(cypher: RotorName, ringPosition: number, position: number) {
+    super(Rotor.CYPHER[cypher]);
+    this.notchPosition =
+      Rotor.CYPHER[cypher].indexOf(Rotor.NOTCH_POSITION[cypher]) + 1;
     this.ringPosition = ringPosition;
     this.position = position;
+
     if (this.position > 1) {
       this.rotate(position - 1);
     }
