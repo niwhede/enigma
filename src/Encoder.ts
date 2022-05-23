@@ -1,46 +1,12 @@
 export abstract class Encoder {
   // this can be string?
-  static ALPHA = [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z",
-  ];
+  static ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
   cypher: string;
 
   constructor(cypher: string) {
     this.cypher = cypher;
   }
-
-  // getInvertedCypher() {
-  //   const result = Encoder.ALPHA.map((letter) => {
-  //     return {};
-  //   });
-  //   return result;
-  // }
 
   encode(char: string, direction: "f" | "b" = "f") {
     let result: string;

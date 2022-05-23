@@ -25,14 +25,3 @@ describe("I II III", () => {
     expect(enigma.getRotorPositions()).toEqual([2, 1, 1]);
   });
 });
-
-// describe.only("Encoder", () => {
-//   test("should invert cypher", () => {
-//     const rotor = new Rotor(Rotor.CYPHER.III, 1, 1);
-//     const result = rotor.invertRotor();
-//     // ABCDEFGHIJKLMNOPQRSTUVWXYZ
-//     // BDFHJLCPRTXVZNYEIWGAKMUSQO <- cypher
-//     // TAGBPCSDQEUFVNZHYIXJWLRKOM <- inverse
-//     expect(result).toEqual("TAGBPCSDQEUFVNZHYIXJWLRKOM");
-//   });
-// });
