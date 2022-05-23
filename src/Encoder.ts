@@ -1,5 +1,4 @@
 export abstract class Encoder {
-  // this can be string?
   static ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
   cypher: string;
