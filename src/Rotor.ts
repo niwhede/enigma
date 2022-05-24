@@ -33,9 +33,11 @@ export class Rotor extends Encoder {
   private rotorName: RotorName;
 
   constructor(rotorName: RotorName, ringPosition: number, position: number) {
-    super(Rotor.CYPHER[rotorName]);
+    super(Rotor.CYPHER[rotorName], rotorName);
     this.notchPosition =
-      Rotor.CYPHER[rotorName].indexOf(Rotor.NOTCH_POSITION[rotorName]) + 1;
+      Encoder.ALPHA.indexOf(Rotor.NOTCH_POSITION[rotorName]) + 1;
+    // this.notchPosition =
+    //   Rotor.CYPHER[rotorName].indexOf(Rotor.NOTCH_POSITION[rotorName]) + 1;
     this.ringPosition = ringPosition;
     this.position = position;
     this.rotorName = rotorName;
@@ -50,6 +52,7 @@ export class Rotor extends Encoder {
     if (this.position > 26) {
       this.position = 1;
     }
+    return this.position;
   }
 
   getPosition() {
@@ -58,5 +61,9 @@ export class Rotor extends Encoder {
 
   getName() {
     return this.rotorName;
+  }
+
+  getNotchPosition() {
+    return this.notchPosition;
   }
 }

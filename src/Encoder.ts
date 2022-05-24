@@ -1,10 +1,11 @@
 export abstract class Encoder {
   static ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
+  name: string;
   cypher: string;
 
-  constructor(cypher: string) {
+  constructor(cypher: string, name: string) {
     this.cypher = cypher;
+    this.name = name;
   }
 
   rotateCypher(cypher: string, steps: number) {

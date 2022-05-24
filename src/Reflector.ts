@@ -8,6 +8,6 @@ export class Reflector extends Encoder {
   };
 
   constructor(cypher: string) {
-    super(cypher);
+    super(cypher, "Reflector");
   }
 }
