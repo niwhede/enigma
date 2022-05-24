@@ -16,6 +16,7 @@ export abstract class Encoder {
   encode(char: string, offset: number, direction: "f" | "b" = "f") {
     let result: string;
     const rotatedAlpha = this.rotateCypher(Encoder.ALPHA, offset);
+
     if (direction === "f") {
       const indexInAlpha = Encoder.ALPHA.indexOf(char);
       const encodedChar = this.cypher[indexInAlpha];

@@ -1,30 +1,20 @@
 import { Enigma } from "./Enigma";
 import { Reflector } from "./Reflector";
 import { Rotor } from "./Rotor";
+import { testData } from "./testData";
 
-const enigma = new Enigma(
-  [
-    new Rotor(Rotor.ROTOR.III, 1, 1),
-    new Rotor(Rotor.ROTOR.II, 1, 1),
-    new Rotor(Rotor.ROTOR.I, 1, 1),
-  ],
-  new Reflector(Reflector.CYPHER.B)
-);
 console.clear();
+const i = parseInt(process.argv[2], 10);
+const test = testData[i];
+const enigma = new Enigma(
+  test.rotors.map((r) => new Rotor(r.rotor, r.startPos, r.ringPos)),
+  new Reflector(test.reflector)
+);
+
 console.log("Rotor start position", enigma.getRotorPositions());
-const result = enigma.encode("JOHAN");
+const result = enigma.encode(test.input);
 console.log("");
 console.log("encoded:", result);
-console.log("actual:", "SITGC");
+console.log("actual:", test.output);
 console.log("Rotor end position", enigma.getRotorPositions());
-
 console.log(`---------------------`);
-console.log(`Expected path:`);
-console.log(`Plugboard Encryption: A
-Wheel 3 Encryption: C
-Wheel 2 Encryption: D
-Wheel 1 Encryption: F
-Reflector Encryption: S
-Wheel 1 Encryption: S
-Wheel 2 Encryption: E
-Wheel 3 Encryption: B`);

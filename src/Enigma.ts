@@ -20,11 +20,18 @@ export class Enigma {
       if (rotor instanceof Rotor) {
         if (i === 0) {
           rotor.rotate(1);
+          return rotor.encode(encoded, rotor.getPosition() - 1, "f");
+        } else if (i < 4) {
+          offset = rotor.getPosition() - 1;
+          return rotor.encode(encoded, offset, "f");
+        } else {
+          offset = rotor.getPosition() - 1;
+          return rotor.encode(encoded, offset, "b");
         }
-        offset = rotor.getPosition() - 1;
+      } else {
+        // at reflector
+        return rotor.encode(encoded, 0, "f");
       }
-      encoded = rotor.encode(encoded, offset, i > 3 ? "b" : "f");
-      return encoded;
     }, char);
     this.printRotorPosition();
     return res;
