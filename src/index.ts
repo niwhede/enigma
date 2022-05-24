@@ -12,10 +12,10 @@ const enigma = new Enigma(
 );
 console.clear();
 console.log("Rotor start position", enigma.getRotorPositions());
-const result = enigma.encode("ABC");
+const result = enigma.encode("JOHAN");
 console.log("");
 console.log("encoded:", result);
-console.log("actual:", "BJE");
+console.log("actual:", "SITGC");
 console.log("Rotor end position", enigma.getRotorPositions());
 
 console.log(`---------------------`);

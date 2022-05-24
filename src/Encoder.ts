@@ -14,17 +14,17 @@ export abstract class Encoder {
 
   encode(char: string, offset: number, direction: "f" | "b" = "f") {
     let result: string;
+    const rotatedAlpha = this.rotateCypher(Encoder.ALPHA, offset);
     if (direction === "f") {
-      let index = Encoder.ALPHA.indexOf(char) + offset; // Where char is in rotated alpahet
-      result = this.cypher[index - offset]; // The char it encodes to
-      index = Encoder.ALPHA.indexOf(result) - offset; // The index of that char in rotated alphabet
-      result = Encoder.ALPHA[index]; // The char at that index in the alphabet
+      const indexInAlpha = Encoder.ALPHA.indexOf(char);
+      const encodedChar = this.cypher[indexInAlpha];
+      const indexInRotatedAlpha = rotatedAlpha.indexOf(encodedChar);
+      result = Encoder.ALPHA[indexInRotatedAlpha];
     } else {
-      let index = Encoder.ALPHA.indexOf(char) + offset;
-      let charAtIndex = Encoder.ALPHA[index];
-      let indexInCypher = this.cypher.indexOf(charAtIndex);
-      let testResult = Encoder.ALPHA[indexInCypher];
-      result = testResult;
+      const indexInAlpha = Encoder.ALPHA.indexOf(char);
+      const charAtIndex = rotatedAlpha[indexInAlpha];
+      const indexInCypher = this.cypher.indexOf(charAtIndex);
+      result = Encoder.ALPHA[indexInCypher];
     }
     console.log(char, this.cypher, result);
     return result;
