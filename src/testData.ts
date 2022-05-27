@@ -43,4 +43,10 @@ export const testData = [
     input: "A",
     output: "U",
   },
+  {
+    rotors: [RotorIII, RotorII, RotorI],
+    reflector: Reflector.CYPHER.B,
+    input: "J",
+    output: "S",
+  },
 ];

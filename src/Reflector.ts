@@ -1,6 +1,6 @@
-import { Encoder } from "./Encoder";
+import { Cypher } from "./Cypher";
 
-export class Reflector extends Encoder {
+export class Reflector extends Cypher {
   static CYPHER = {
     A: "EJMZALYXVBWFCRQUONTSPIKHGD",
     B: "YRUHQSLDPXNGOKMIEBFZCWVJAT",

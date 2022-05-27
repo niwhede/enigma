@@ -1,8 +1,8 @@
-import { Encoder } from "./Encoder";
+import { Cypher } from "./Cypher";
 
 type RotorName = "I" | "II" | "III" | "IV" | "V";
 
-export class Rotor extends Encoder {
+export class Rotor extends Cypher {
   static ROTOR: Record<RotorName, RotorName> = {
     I: "I",
     II: "II",
@@ -12,6 +12,7 @@ export class Rotor extends Encoder {
   };
 
   static CYPHER: Record<RotorName, string> = {
+    //  ABCDEFGHIJKLMNOP
     I: "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
     II: "AJDKSIRUXBLHWTMCQGZNPYFVOE",
     III: "BDFHJLCPRTXVZNYEIWGAKMUSQO",
@@ -35,17 +36,17 @@ export class Rotor extends Encoder {
   constructor(rotorName: RotorName, ringPosition: number, position: number) {
     super(Rotor.CYPHER[rotorName], rotorName);
     this.notchPosition =
-      Encoder.ALPHA.indexOf(Rotor.NOTCH_POSITION[rotorName]) + 1;
-    // this.notchPosition =
-    //   Rotor.CYPHER[rotorName].indexOf(Rotor.NOTCH_POSITION[rotorName]) + 1;
+      Cypher.ALPHA.indexOf(Rotor.NOTCH_POSITION[rotorName]) + 1;
     this.ringPosition = ringPosition;
     this.position = position;
     this.rotorName = rotorName;
 
+    this.input = this.rotateCypher(this.input, position - 1);
     this.cypher = this.rotateCypher(this.cypher, position - 1);
   }
 
   rotate(steps: number) {
+    this.input = this.rotateCypher(this.input, steps);
     this.cypher = this.rotateCypher(this.cypher, steps);
     this.position = this.position + 1;
 
