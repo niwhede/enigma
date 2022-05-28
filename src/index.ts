@@ -14,7 +14,7 @@ const enigma = new Enigma(
 console.log("Rotor start position", enigma.getRotorPositions());
 const result = enigma.encode(test.input);
 console.log("");
-console.log("encoded:", result);
-console.log("actual:", test.output);
+console.log("enc:", result);
+console.log("act:", test.output);
 console.log("Rotor end position", enigma.getRotorPositions());
 console.log(`---------------------`);

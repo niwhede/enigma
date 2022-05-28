@@ -9,8 +9,8 @@ const RotorIII = {
 
 const RotorIIIAtNotch = {
   rotor: Rotor.ROTOR.III,
-  startPos: 1,
-  ringPos: 21,
+  startPos: 22,
+  ringPos: 1,
 };
 
 const RotorII = {
@@ -38,7 +38,7 @@ export const testData = [
     output: "SITGC",
   },
   {
-    rotors: [RotorIII, RotorII, RotorIIIAtNotch],
+    rotors: [RotorIIIAtNotch, RotorII, RotorI],
     reflector: Reflector.CYPHER.B,
     input: "A",
     output: "U",
@@ -48,5 +48,11 @@ export const testData = [
     reflector: Reflector.CYPHER.B,
     input: "J",
     output: "S",
+  },
+  {
+    rotors: [RotorIII, RotorII, RotorI],
+    reflector: Reflector.CYPHER.B,
+    input: "JOHANSANNALOWEMAXNIWHEDE",
+    output: "SITGCXCMVTOHDBACQSDKWPFZ",
   },
 ];

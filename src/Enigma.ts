@@ -15,10 +15,14 @@ export class Enigma {
   }
 
   encodeChar(char: string) {
-    const res = this.getEncodingChain().reduce((encoded, rotor, i) => {
+    const rotors = this.getEncodingChain();
+    const res = rotors.reduce((encoded, rotor, i) => {
       if (rotor instanceof Rotor) {
         if (i === 0) {
           rotor.rotate(1);
+          if (rotor.getNotchPosition() === rotor.getPosition() - 1) {
+            (rotors[i + 1] as Rotor).rotate(1);
+          }
           return rotor.encode(encoded, "f");
         } else if (i < 4) {
           return rotor.encode(encoded, "f");

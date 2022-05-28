@@ -33,7 +33,7 @@ export class Rotor extends Cypher {
   private notchPosition: number;
   private rotorName: RotorName;
 
-  constructor(rotorName: RotorName, ringPosition: number, position: number) {
+  constructor(rotorName: RotorName, position: number, ringPosition: number) {
     super(Rotor.CYPHER[rotorName], rotorName);
     this.notchPosition =
       Cypher.ALPHA.indexOf(Rotor.NOTCH_POSITION[rotorName]) + 1;
