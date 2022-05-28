@@ -12,7 +12,6 @@ export class Rotor extends Cypher {
   };
 
   static CYPHER: Record<RotorName, string> = {
-    //  ABCDEFGHIJKLMNOP
     I: "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
     II: "AJDKSIRUXBLHWTMCQGZNPYFVOE",
     III: "BDFHJLCPRTXVZNYEIWGAKMUSQO",

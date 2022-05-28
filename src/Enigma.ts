@@ -25,6 +25,11 @@ export class Enigma {
           }
           return rotor.encode(encoded, "f");
         } else if (i < 4) {
+          if (i === 1) {
+            if (rotor.getNotchPosition() === rotor.getPosition() - 1) {
+              (rotors[i + 1] as Rotor).rotate(1);
+            }
+          }
           return rotor.encode(encoded, "f");
         } else {
           return rotor.encode(encoded, "b");
@@ -34,7 +39,7 @@ export class Enigma {
         return rotor.encode(encoded, "f");
       }
     }, char);
-    // this.printRotorPosition();
+    this.printRotorPosition();
     return res;
   }
 
