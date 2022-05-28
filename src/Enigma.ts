@@ -34,7 +34,7 @@ export class Enigma {
         return rotor.encode(encoded, "f");
       }
     }, char);
-    this.printRotorPosition();
+    // this.printRotorPosition();
     return res;
   }
 
@@ -42,7 +42,7 @@ export class Enigma {
     return message
       .split("")
       .map((char) => {
-        console.log("--------------------------------------");
+        // console.log("--------------------------------------");
         return this.encodeChar(char);
       })
       .join("");

@@ -1,6 +1,6 @@
 import { Cypher } from "./Cypher";
 
-type RotorName = "I" | "II" | "III" | "IV" | "V";
+export type RotorName = "I" | "II" | "III" | "IV" | "V";
 
 export class Rotor extends Cypher {
   static ROTOR: Record<RotorName, RotorName> = {

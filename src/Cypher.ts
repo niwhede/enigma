@@ -29,10 +29,7 @@ export abstract class Cypher {
       const indexInCypher = this.cypher.indexOf(charInInput);
       result = Cypher.ALPHA[indexInCypher];
     }
-
-    console.log(" ", Cypher.ALPHA, " ");
-    console.log(" ", this.input, " ");
-    console.log(char, this.cypher, result);
+    // console.log(char, this.cypher, result);
     return result;
   }
 }
