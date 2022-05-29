@@ -1,4 +1,5 @@
 import { Enigma } from "../Enigma";
+import { Plugboard } from "../Plugboard";
 import { Reflector } from "../Reflector";
 import { Rotor, RotorName } from "../Rotor";
 
@@ -13,7 +14,7 @@ const getSettings = (input: string) => {
   });
 };
 
-describe("", () => {
+describe("Only rotors", () => {
   test.each([
     { settings: "III:1-1 II:1-1 I:1-1", input: "A", output: "B" },
     { settings: "III:1-1 II:1-1 I:1-1", input: "JOHAN", output: "SITGC" },
@@ -25,8 +26,36 @@ describe("", () => {
   ])("$settings: $input -> $output", ({ settings, input, output }) => {
     const result = new Enigma(
       getSettings(settings),
-      new Reflector(Reflector.CYPHER.B)
+      new Reflector(Reflector.CYPHER.B),
+      new Plugboard()
     ).encode(input);
     expect(result).toEqual(output);
   });
+});
+
+describe("Only rotors", () => {
+  test.each([
+    {
+      settings: "III:1-1 II:1-1 I:1-1",
+      input: "AAA",
+      output: "BJL",
+      plugboard: "AB",
+    },
+    {
+      settings: "III:1-1 II:1-1 I:1-1",
+      input: "THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG",
+      output: "HUSPKKGDKBKQJOMUWDYELGOSLXXFULIPWLD",
+      plugboard: "AB FC KL MN PE RT VH JX QW GD",
+    },
+  ])(
+    "$settings: $input -> $output",
+    ({ settings, input, output, plugboard }) => {
+      const result = new Enigma(
+        getSettings(settings),
+        new Reflector(Reflector.CYPHER.B),
+        new Plugboard(plugboard)
+      ).encode(input);
+      expect(result).toEqual(output);
+    }
+  );
 });

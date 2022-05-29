@@ -1,4 +1,5 @@
 import { Enigma } from "./Enigma";
+import { Plugboard } from "./Plugboard";
 import { Reflector } from "./Reflector";
 import { Rotor } from "./Rotor";
 import { testData } from "./testData";
@@ -8,7 +9,8 @@ const i = parseInt(process.argv[2], 10);
 const test = testData[i];
 const enigma = new Enigma(
   test.rotors.map((r) => new Rotor(r.rotor, r.startPos, r.ringPos)),
-  new Reflector(test.reflector)
+  new Reflector(test.reflector),
+  new Plugboard(test.plugboard)
 );
 
 console.log("Rotor start position", enigma.getRotorPositions());

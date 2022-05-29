@@ -1,13 +1,16 @@
+import { Plugboard } from "./Plugboard";
 import { Reflector } from "./Reflector";
 import { Rotor } from "./Rotor";
 
 export class Enigma {
   rotors: Rotor[];
   reflector: Reflector;
+  plugboard: Plugboard;
 
-  constructor(rotors: Rotor[], reflector: Reflector) {
+  constructor(rotors: Rotor[], reflector: Reflector, plugboard: Plugboard) {
     this.rotors = rotors;
     this.reflector = reflector;
+    this.plugboard = plugboard;
   }
 
   getEncodingChain() {
@@ -15,6 +18,7 @@ export class Enigma {
   }
 
   encodeChar(char: string) {
+    const plugboardEncryption = this.plugboard.encode(char);
     const rotors = this.getEncodingChain();
     const res = rotors.reduce((encoded, rotor, i) => {
       if (rotor instanceof Rotor) {
@@ -27,8 +31,8 @@ export class Enigma {
         // reflector
         return rotor.encode(encoded, "f");
       }
-    }, char);
-    return res;
+    }, plugboardEncryption);
+    return this.plugboard.encode(res);
   }
 
   rotateRotors() {
