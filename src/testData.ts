@@ -18,11 +18,19 @@ const RotorII = {
   startPos: 1,
   ringPos: 1,
 };
+
 const RotorI = {
   rotor: Rotor.ROTOR.I,
   startPos: 1,
   ringPos: 1,
 };
+
+// ADU
+const DoubleRotation = [
+  { ...RotorIII, startPos: 21 },
+  { ...RotorII, startPos: 4 },
+  RotorI,
+];
 
 export const testData = [
   {
@@ -62,5 +70,11 @@ export const testData = [
       "ANDALLMYDAYSARETRANCESANDALLMYNIGHTLYDREAMSAREWHERETHYGREYEYEGLANCESANDWHERETHYFOOTSTEPGLEAMSINWHATETHEREALDANCESBYWHATETERNALSTREAMS",
     output:
       "BQJGUIOERTZABMSWPLYIYIQQVXMOINFXQSXAWBFTXDYIHTSAALZVVFOHCOBFMBITXVYAOYMVJQOHWKPCTRORESIVQUIXKRCZSEYBNZGHPJFLZDAVIKZSKXJLURTWBTTJPMJND",
+  },
+  {
+    rotors: DoubleRotation,
+    reflector: Reflector.CYPHER.B,
+    input: "JOHAN",
+    output: "MNFBV",
   },
 ];

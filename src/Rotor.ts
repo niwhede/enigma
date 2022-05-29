@@ -45,6 +45,7 @@ export class Rotor extends Cypher {
   }
 
   rotate(steps: number) {
+    if (steps === 0) return;
     this.input = this.rotateCypher(this.input, steps);
     this.cypher = this.rotateCypher(this.cypher, steps);
     this.position = this.position + 1;
