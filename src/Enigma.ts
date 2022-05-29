@@ -1,4 +1,3 @@
-import { Cypher } from "./Cypher";
 import { Reflector } from "./Reflector";
 import { Rotor } from "./Rotor";
 
@@ -19,14 +18,13 @@ export class Enigma {
     const rotors = this.getEncodingChain();
     const res = rotors.reduce((encoded, rotor, i) => {
       if (rotor instanceof Rotor) {
-        if (i === 0) {
-          return rotor.encode(encoded, "f");
-        } else if (i < 4) {
+        if (i < 4) {
           return rotor.encode(encoded, "f");
         } else {
           return rotor.encode(encoded, "b");
         }
       } else {
+        // reflector
         return rotor.encode(encoded, "f");
       }
     }, char);
@@ -69,10 +67,6 @@ export class Enigma {
   }
 
   printRotorPosition() {
-    // console.log(this.rotors.map((r) => `${r.getName()}: ${r.getPosition()}`));
-    console.log(
-      "Rotors Position:",
-      this.rotors.map((r) => `${Cypher.ALPHA[r.getPosition() - 1]}`).reverse()
-    );
+    console.log(this.rotors.map((r) => `${r.getName()}: ${r.getPosition()}`));
   }
 }
