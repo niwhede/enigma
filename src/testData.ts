@@ -25,7 +25,6 @@ const RotorI = {
   ringPos: 1,
 };
 
-// ADU
 const DoubleRotation = [
   { ...RotorIII, startPos: 21 },
   { ...RotorII, startPos: 4 },
@@ -83,5 +82,17 @@ export const testData = [
     plugboard: "AB",
     input: "AAA",
     output: "BJL",
+  },
+  {
+    rotors: [{ ...RotorIII, ringPos: 2 }, RotorII, RotorI],
+    reflector: Reflector.CYPHER.B,
+    input: "AAA",
+    output: "UBD",
+  },
+  {
+    rotors: [RotorIII, RotorII, RotorI],
+    reflector: Reflector.CYPHER.B,
+    input: "OPCILLAZFXLQTDNLGGLEKDIZOKQKGXIEZKD",
+    output: "THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG",
   },
 ];

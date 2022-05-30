@@ -98,6 +98,6 @@ describe("Encode with plugboard", () => {
 
 describe("Encode with ring positions", () => {
   test("should encode with ring positions", () => {
-    encode({ rotors: "III:1-15 II:1-10 I:1-5" }, "AAAAA", "VHPYD");
+    encode({ rotors: "III:1-15 II:1-10 I:1-5" }, "AAA", "UBD");
   });
 });
