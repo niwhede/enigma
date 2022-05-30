@@ -3,8 +3,6 @@ import { Plugboard } from "../Plugboard";
 import { Reflector } from "../Reflector";
 import { Rotor, RotorName } from "../Rotor";
 
-const s = "thequickbrownfoxjumpsoverthelazydog".toUpperCase();
-
 const getSettings = (input: string) => {
   const rotors = input.split(" ");
   return rotors.map((r) => {
@@ -14,48 +12,92 @@ const getSettings = (input: string) => {
   });
 };
 
-describe("Only rotors", () => {
-  test.each([
-    { settings: "III:1-1 II:1-1 I:1-1", input: "A", output: "B" },
-    { settings: "III:1-1 II:1-1 I:1-1", input: "JOHAN", output: "SITGC" },
-    { settings: "III:1-1 II:1-1 I:1-1", input: "THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG", output: "OPCILLAZFXLQTDNLGGLEKDIZOKQKGXIEZKD" }, // prettier-ignore
-    { settings: "IV:1-1 II:1-1 I:1-1", input: "THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG", output: "ZKGBVBNDXSIIWQSCBWHWXPMUMPYWRQFEZWP" }, // prettier-ignore
-    { settings: "III:4-1 II:22-1 I:10-1", input: "THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG", output: "FDKYDJEMXSKHHNFKODQYJRYWLKVURWDLSHS" }, // prettier-ignore
-    { settings: "III:1-1 II:1-1 I:1-1", input: "ANDALLMYDAYSARETRANCESANDALLMYNIGHTLYDREAMSAREWHERETHYGREYEYEGLANCESANDWHERETHYFOOTSTEPGLEAMSINWHATETHEREALDANCESBYWHATETERNALSTREAMS", output: "BQJGUIOERTZABMSWPLYIYIQQVXMOINFXQSXAWBFTXDYIHTSAALZVVFOHCOBFMBITXVYAOYMVJQOHWKPCTRORESIVQUIXKRCZSEYBNZGHPJFLZDAVIKZSKXJLURTWBTTJPMJND" }, // prettier-ignore
-    { settings: "III:21-1 II:4-1 I:1-1", input: "JOHAN", output: "MNFBV" }, // prettier-ignore
-  ])("$settings: $input -> $output", ({ settings, input, output }) => {
-    const result = new Enigma(
-      getSettings(settings),
+type Settings = {
+  rotors: string;
+  plugboard?: string;
+};
+
+const encode = (settings: Settings, input: string, output: string) => {
+  expect(
+    new Enigma(
+      getSettings(settings.rotors),
       new Reflector(Reflector.CYPHER.B),
-      new Plugboard()
-    ).encode(input);
-    expect(result).toEqual(output);
+      new Plugboard(settings.plugboard || undefined)
+    ).encode(input)
+  ).toEqual(output);
+};
+
+describe("Encode using only rotors", () => {
+  test("should encode one character", () => {
+    encode({ rotors: "III:1-1 II:1-1 I:1-1" }, "A", "B");
+  });
+
+  test("should encode multiple characters", () => {
+    encode({ rotors: "III:1-1 II:1-1 I:1-1" }, "AAAAA", "BDZGO");
+  });
+
+  test("should encode with rotors III-II-I", () => {
+    encode(
+      { rotors: "III:1-1 II:1-1 I:1-1" },
+      "THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG",
+      "OPCILLAZFXLQTDNLGGLEKDIZOKQKGXIEZKD"
+    );
   });
 });
 
-describe("Only rotors", () => {
-  test.each([
-    {
-      settings: "III:1-1 II:1-1 I:1-1",
-      input: "AAA",
-      output: "BJL",
-      plugboard: "AB",
-    },
-    {
-      settings: "III:1-1 II:1-1 I:1-1",
-      input: "THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG",
-      output: "HUSPKKGDKBKQJOMUWDYELGOSLXXFULIPWLD",
-      plugboard: "AB FC KL MN PE RT VH JX QW GD",
-    },
-  ])(
-    "$settings: $input -> $output",
-    ({ settings, input, output, plugboard }) => {
-      const result = new Enigma(
-        getSettings(settings),
-        new Reflector(Reflector.CYPHER.B),
-        new Plugboard(plugboard)
-      ).encode(input);
-      expect(result).toEqual(output);
-    }
-  );
+describe("Encode using different rotors", () => {
+  test("should encode with rotors IV-II-I", () => {
+    encode(
+      { rotors: "I:1-1 IV:1-1 V:1-1" },
+      "THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG",
+      "QNZFLVXFNSSXYJLZMTWUCPCGKFTMQBMVGMQ"
+    );
+  });
+});
+
+describe("Encode with starting positions", () => {
+  test("should encode with rotors III-II-I in starting positions 4-22-10", () => {
+    encode(
+      { rotors: "III:4-1 II:22-1 I:10-1" },
+      "THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG",
+      "FDKYDJEMXSKHHNFKODQYJRYWLKVURWDLSHS"
+    );
+  });
+});
+
+describe("Encode with rotation of all rotors", () => {
+  test("should test that all rotors rotate correctly ", () => {
+    encode({ rotors: "III:21-1 II:4-1 I:1-1" }, "JOHAN", "MNFBV");
+  });
+
+  test("should test that all rotors rotate correctly with long string in start position 1-1-1", () => {
+    encode(
+      { rotors: "III:1-1 II:1-1 I:1-1" },
+      "ANDALLMYDAYSARETRANCESANDALLMYNIGHTLYDREAMSAREWHERETHYGREYEYEGLANCESANDWHERETHYFOOTSTEPGLEAMSINWHATETHEREALDANCESBYWHATETERNALSTREAMS",
+      "BQJGUIOERTZABMSWPLYIYIQQVXMOINFXQSXAWBFTXDYIHTSAALZVVFOHCOBFMBITXVYAOYMVJQOHWKPCTRORESIVQUIXKRCZSEYBNZGHPJFLZDAVIKZSKXJLURTWBTTJPMJND"
+    );
+  });
+});
+
+describe("Encode with plugboard", () => {
+  test("should encode with one plug", () => {
+    encode({ rotors: "III:1-1 II:1-1 I:1-1", plugboard: "AB" }, "AAA", "BJL");
+  });
+
+  test("should encode with all plugs", () => {
+    encode(
+      {
+        rotors: "III:1-1 II:1-1 I:1-1",
+        plugboard: "AB FC KL MN PE RT VH JX QW GD",
+      },
+      "THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG",
+      "HUSPKKGDKBKQJOMUWDYELGOSLXXFULIPWLD"
+    );
+  });
+});
+
+describe("Encode with ring positions", () => {
+  test("should encode with ring positions", () => {
+    encode({ rotors: "III:1-15 II:1-10 I:1-5" }, "AAAAA", "VHPYD");
+  });
 });
