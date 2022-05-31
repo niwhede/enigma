@@ -58,6 +58,8 @@ export class Enigma {
 
   encode(message: string) {
     return message
+      .toUpperCase()
+      .replace(/ /g, "")
       .split("")
       .map((char) => {
         this.rotateRotors();

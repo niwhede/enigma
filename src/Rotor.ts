@@ -40,8 +40,8 @@ export class Rotor extends Cypher {
     this.position = position;
     this.rotorName = rotorName;
 
-    this.input = this.rotateCypher(this.input, position - 1);
-    this.cypher = this.rotateCypher(this.cypher, position - 1);
+    this.input = this.rotateCypher(this.input, position - this.ringPosition);
+    this.cypher = this.rotateCypher(this.cypher, position - this.ringPosition);
   }
 
   rotate(steps: number) {

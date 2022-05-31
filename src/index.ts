@@ -1,3 +1,4 @@
+import { Bombe } from "./Bombe";
 import { Enigma } from "./Enigma";
 import { Plugboard } from "./Plugboard";
 import { Reflector } from "./Reflector";
@@ -13,6 +14,8 @@ const enigma = new Enigma(
   new Plugboard(test.plugboard)
 );
 
+const bombe = new Bombe();
+
 console.log("Rotor start position", enigma.getRotorPositions());
 const result = enigma.encode(test.input);
 console.log("");
@@ -20,3 +23,5 @@ console.log("enc:", result);
 console.log("act:", test.output);
 console.log("Rotor end position", enigma.getRotorPositions());
 console.log(`---------------------`);
+console.log("Decrypted:");
+// console.log(bombe.decrypt(result, test.phrase as string));
