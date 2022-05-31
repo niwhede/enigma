@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "enigma": "yarn ts-node ./src/Enigma/index.ts",
+    "bombe": "yarn ts-node ./src/Bombe/index.ts",
     "test": "jest"
   },
   "dependencies": {

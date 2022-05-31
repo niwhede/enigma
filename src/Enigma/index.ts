@@ -40,6 +40,7 @@ program
     "-p, --plugboard <string>",
     "plugboard settings, e.g AB FC KL MN PE RT VH JX QW GD"
   )
+  .option("-v --verbose", "Verbose output")
   .action((str, options) => {
     const message = str.toUpperCase().replace(/ /g, "");
     const rotors = getSettings(options.rotors);
@@ -50,7 +51,11 @@ program
       new Plugboard(plugboard)
     );
     const encoded = enigma.encode(message);
-    print(message, encoded);
+    if (options.verbose) {
+      print(message, encoded);
+    } else {
+      console.log(encoded);
+    }
   });
 
 program.parse();
