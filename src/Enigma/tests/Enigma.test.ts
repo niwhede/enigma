@@ -1,16 +1,8 @@
+import { getSettings } from "..";
 import { Enigma } from "../Enigma";
 import { Plugboard } from "../Plugboard";
 import { Reflector } from "../Reflector";
 import { Rotor, RotorName } from "../Rotor";
-
-const getSettings = (input: string) => {
-  const rotors = input.split(" ");
-  return rotors.map((r) => {
-    const [rotor, positions] = r.split(":") as [RotorName, string];
-    const [pos, ringPos] = positions.split("-").map(Number);
-    return new Rotor(Rotor.ROTOR[rotor], pos, ringPos);
-  });
-};
 
 type Settings = {
   rotors: string;
