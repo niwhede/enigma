@@ -6,7 +6,8 @@
   "scripts": {
     "enigma": "yarn ts-node ./src/Enigma/index.ts",
     "bombe": "yarn ts-node ./src/Bombe/index.ts",
-    "test": "jest"
+    "test": "jest",
+    "test:bombe": "jest ./src/Bombe/tests/"
   },
   "dependencies": {
     "@types/node": "^17.0.35",
