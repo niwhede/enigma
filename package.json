@@ -1,13 +1,19 @@
 {
-  "name": "enigma",
+  "name": "jniwhede-enigma",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/enigma",
+    "packages/bombe"
+  ],
   "scripts": {
-    "enigma": "yarn ts-node ./src/Enigma/index.ts",
-    "bombe": "yarn ts-node ./src/Bombe/index.ts",
-    "test": "jest",
-    "test:bombe": "jest ./src/Bombe/tests/"
+    "enigma": "yarn workspace enigma start",
+    "bombe": "yarn workspace bombe start",
+    "build:enigma": "yarn workspace enigma build",
+    "build:bombe": "yarn workspace bombe build",
+    "test": "yarn workspaces run test"
   },
   "dependencies": {
     "@types/node": "^17.0.35",

@@ -1,0 +1,26 @@
+{
+  "name": "enigma",
+  "version": "1.0.0",
+  "main": "./bin/index.js",
+  "bin": {
+    "enigma": "./bin/index.js"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node ./src/index.ts",
+    "test": "jest",
+    "build": "tsc -p ."
+  },
+  "dependencies": {
+    "@types/node": "^17.0.35",
+    "chalk": "4.1.2",
+    "commander": "^9.3.0",
+    "typescript": "^4.6.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.5.1",
+    "jest": "^28.1.0",
+    "ts-jest": "^28.0.2",
+    "ts-node": "^10.8.0"
+  }
+}
