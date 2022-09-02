@@ -1,4 +1,5 @@
 import { Command } from "commander";
+import { Bombe } from "./Bombe";
 const program = new Command();
 
 program
@@ -12,7 +13,7 @@ program
   .requiredOption("-m --message [string]", "the encrypted message to decode")
   .requiredOption("-c --crib <string>", "the known phrase used for decoding")
   .action((options) => {
-    console.log(options);
+    new Bombe(options.message, options.crib).decode();
   });
 
 program.parse();
