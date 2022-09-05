@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 import { Enigma } from "./Enigma";
 import { Plugboard } from "./Plugboard";
 import { Reflector } from "./Reflector";
@@ -61,3 +60,9 @@ program
   });
 
 program.parse();
+
+export * from "./Enigma";
+export * from "./Rotor";
+export * from "./Plugboard";
+export * from "./Cypher";
+export * from "./Reflector";

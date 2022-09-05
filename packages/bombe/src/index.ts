@@ -12,8 +12,9 @@ program
   .description("Decode a message encrypted by Enigma")
   .requiredOption("-m --message [string]", "the encrypted message to decode")
   .requiredOption("-c --crib <string>", "the known phrase used for decoding")
+  .option("-p --print", "print progress")
   .action((options) => {
-    new Bombe(options.message, options.crib).decode();
+    new Bombe(options.message, options.crib, options.print).decode();
   });
 
 program.parse();

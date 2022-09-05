@@ -1173,6 +1173,11 @@ graceful-fs@^4.2.9:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.10.tgz#147d3a006da4ca3ce14728c7aefc287c367d7a6c"
   integrity sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==
 
+graph.js@^1.21.1:
+  version "1.21.1"
+  resolved "https://registry.yarnpkg.com/graph.js/-/graph.js-1.21.1.tgz#7e0354b41f7494dfd1869b9dec1b77ef30653853"
+  integrity sha512-h37V3CoVDdsuzpKAzjyrcgnKBqjBAB6EnncJCx+d42o6XX9a+eOrvtBjW+LM7vxVr3dBtUcIIaSsKCTyAi1kew==
+
 has-flag@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
